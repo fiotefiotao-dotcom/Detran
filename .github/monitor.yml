@@ -1,0 +1,35 @@
+name: monitor-resende
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Verificar Resende
+        env:
+          CPF: ${{ secrets.CPF }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          node monitor.mjs
+          rc=$?
+          if [ $rc -eq 10 ]; then
+            gh workflow disable monitor.yml --repo "$GITHUB_REPOSITORY"
+            exit 0
+          fi
+          exit $rc
