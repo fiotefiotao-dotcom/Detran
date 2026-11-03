@@ -20,7 +20,7 @@ async function getList() {
 try {
   const j = await getList();
   if (!j.success || !Array.isArray(j.data) || j.data.length === 0) throw new Error("Resposta inesperada: " + JSON.stringify(j).slice(0, 200));
-  const hit = j.data.find(m => norm(m.NoMuncipio) === "macuco");
+  const hit = j.data.find(m => norm(m.NoMuncipio) === "Macuco");
   console.log(`${new Date().toISOString()} municípios=${j.data.length} resende=${!!hit}`);
   if (!hit) process.exit(0);
   await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
