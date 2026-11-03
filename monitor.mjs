@@ -11,7 +11,7 @@ const PAGE = "https://servicos.detran.rj.gov.br/logincidadao/identificacao-civil
 
 async function getList() {
   if (TEST_FILE) return JSON.parse(readFileSync(TEST_FILE, "utf8"));
-  const r = await fetch(`https://servicos.detran.rj.gov.br/logincidadao/identificacao-civil/buscar-municipios?cpf=${CPF}&_=${Date.now()}`,
+  const r = await fetch(`https://servicos.detran.rj.gov.br/logincidadao/identificacao-civil/buscar-municipios?cpf=${CPF}`,
     { headers: { "User-Agent": "Mozilla/5.0", Accept: "application/json" }, signal: AbortSignal.timeout(30000) });
   if (!r.ok) throw new Error(`HTTP ${r.status}`);
   return r.json();
