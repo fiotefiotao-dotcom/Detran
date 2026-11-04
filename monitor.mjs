@@ -22,11 +22,17 @@ try {
   if (!j.success || !Array.isArray(j.data) || j.data.length === 0) throw new Error("Resposta inesperada: " + JSON.stringify(j).slice(0, 200));
   const hit = j.data.find(m => norm(m.NoMuncipio) === "resende");
   console.log(`${new Date().toISOString()} municípios=${j.data.length} resende=${!!hit}`);
-  if (!hit) process.exit(0);
-  await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-    method: "POST",
-    headers: { Title: "RESENDE abriu no Detran!", Priority: "5", Tags: "rotating_light", Click: PAGE },
-    body: "Resende apareceu na lista de agendamento do RG. Toque para agendar agora.",
-  });
-  process.exit(10);
+  if (!hit) {
+    await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+      method: "POST",
+      headers: { Title: "Nada Ainda!", Priority: "5", Tags: "rotating_light", Click: PAGE },
+      body: "Que lixo de Detran.",
+    });   
+  }else{
+    await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+      method: "POST",
+      headers: { Title: "RESENDE abriu no Detran!", Priority: "5", Tags: "rotating_light", Click: PAGE },
+      body: "Resende apareceu na lista de agendamento do RG. Toque para agendar agora.",
+    });
+  }
 } catch (e) { console.error("ERRO:", e.message); process.exit(1); }
