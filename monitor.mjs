@@ -37,7 +37,7 @@ try {
   {
      await ntfy({ Title: `Detran RG: ${hits.join(", ")}`, Priority: "5", Tags: "rotating_light", Click: PAGE },
       `Ainda nada!!!`);
-    process.exit(10);
+    process.exit(0);
   }
   // Só em execução manual (Run workflow): aviso discreto para confirmar que o celular recebe.
   if (GITHUB_EVENT_NAME === "workflow_dispatch" || TEST_FILE)
