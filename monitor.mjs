@@ -8,7 +8,7 @@ if (!NTFY_TOPIC || (!CPF && !TEST_FILE)) { console.error("Faltam CPF/NTFY_TOPIC"
 
 const CIDADES = ["resende", "barra mansa", "volta redonda", "itatiaia", "porto real"];
 const norm = s => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").trim().toLowerCase();
-const PAGE = "https://servicos.detran.rj.gov.br/logincidadao/identificacao-civil/agendamentoMunicipioDic";
+const PAGE = "https://servicos.detran.rj.gov.br/logincidadao/identificacaoCivil";
 
 async function getList() {
   if (TEST_FILE) return JSON.parse(readFileSync(TEST_FILE, "utf8"));
