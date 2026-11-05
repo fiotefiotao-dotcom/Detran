@@ -33,6 +33,11 @@ try {
     await ntfy({ Title: `Detran RG: ${hits.join(", ")}`, Priority: "5", Tags: "rotating_light", Click: PAGE },
       `Apareceu na lista de agendamento do RG: ${hits.join(", ")} (${j.data.length} municípios). Toque para agendar.`);
     process.exit(10);
+  }else
+  {
+     await ntfy({ Title: `Detran RG: ${hits.join(", ")}`, Priority: "5", Tags: "rotating_light", Click: PAGE },
+      `Ainda nada!!!`);
+    process.exit(10);
   }
   // Só em execução manual (Run workflow): aviso discreto para confirmar que o celular recebe.
   if (GITHUB_EVENT_NAME === "workflow_dispatch" || TEST_FILE)
