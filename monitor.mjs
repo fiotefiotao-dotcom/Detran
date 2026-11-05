@@ -35,9 +35,10 @@ try {
     process.exit(10);
   }else
   {
-     await ntfy({ Title: `Detran RG: ${hits.join(", ")}`, Priority: "5", Tags: "rotating_light", Click: PAGE },
-      `Ainda nada!!!`);
-    process.exit(0);
+    // Título fixo para evitar string vazia no header HTTP
+    await ntfy({ Title: "Detran RG: Sem vagas", Priority: "3", Tags: "eyes", Click: PAGE },
+      `Ainda nada! (${j.data.length} municípios verificados).`);
+    process.exit(10); // Desliga após o teste
   }
   // Só em execução manual (Run workflow): aviso discreto para confirmar que o celular recebe.
   if (GITHUB_EVENT_NAME === "workflow_dispatch" || TEST_FILE)
