@@ -15,7 +15,7 @@ async function getList() {
   const r = await fetch(`https://servicos.detran.rj.gov.br/logincidadao/identificacao-civil/buscar-municipios?cpf=${CPF}&_=${Date.now()}`,
     { headers: { "User-Agent": "Mozilla/5.0", Accept: "application/json" }, signal: AbortSignal.timeout(30000) });
   if (!r.ok) throw new Error(`HTTP ${r.status}`);
-  return r.json();
+  return r.json(); 
 }
 
 async function ntfy(headers, body) {
